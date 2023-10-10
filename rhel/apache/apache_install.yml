@@ -4,30 +4,30 @@
 
   tasks:
   - name: latest Apache version installed
-    yum:
+    ansible.builtin.package:
       name: httpd
       state: latest
 
   - name: latest firewalld version installed
-    yum:
+    ansible.builtin.package:
       name: firewalld
       state: latest
 
   - name: firewalld enabled and running
-    service:
+    ansible.builtin.service:
       name: firewalld
-      enabled: true
       state: started
+      enabled: true
 
   - name: firewalld permits http service
-    firewalld:
+    ansible.posix.firewalld:
       service: http
       permanent: true
       state: enabled
-      immediate: yes
+      immediate: true
 
   - name: Apache enabled and running
-    service:
+    ansible.builtin.service:
       name: httpd
-      enabled: true
       state: started
+      enabled: true
